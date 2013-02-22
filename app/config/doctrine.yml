@@ -45,7 +45,7 @@ doctrine:
                     CeradGameBundle: ~
                dql:
                     datetime_functions:
-                        date:  Cerad\ArbiterBundle\Doctrine\DQL\Date
-                        time:  Cerad\ArbiterBundle\Doctrine\DQL\Time
-                        month: Cerad\ArbiterBundle\Doctrine\DQL\Month
+                        date:  Cerad\Bundle\GameBundle\Doctrine\DQL\Date
+                        time:  Cerad\Bundle\GameBundle\Doctrine\DQL\Time
+                        month: Cerad\Bundle\GameBundle\Doctrine\DQL\Month
                         

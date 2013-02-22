@@ -20,8 +20,9 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             
-            new Cerad\Bundle\GameBundle\CeradGameBundle()
-        );
+            new Cerad\Bundle\GameBundle\CeradGameBundle(),
+            new Cerad\Bundle\ScheduleBundle\CeradScheduleBundle(),
+       );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();

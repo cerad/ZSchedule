@@ -1,0 +1,17 @@
+services:
+  
+    cerad_schedule.schedule.manager:
+        class:  Cerad\Bundle\ScheduleBundle\Schedule\ScheduleManager
+        arguments:  
+            - '@cerad.project.repository'
+            - '@cerad.level.repository'
+            - '@cerad.field.repository'
+            - '@cerad.game.repository'
+
+    cerad_schedule.schedule.import.master:
+        class:  Cerad\Bundle\ScheduleBundle\Schedule\Import\ImportScheduleMaster
+        arguments:  
+            - '@cerad_schedule.schedule.manager'
+
+
+  

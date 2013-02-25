@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}Arbiter Bundle{% endblock %}</title>
+    <meta name="description" content="Cerad Referee Scheduling"/>
+    <meta name="author" content="Art Hundiak"/>
+          
+{# Need this at the top to remember which account was last used to sign in #}
+{% block janrain %}{% endblock %}
+    
+{# Add standard zayso stuff later #}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="{{ asset('bundles/ceradschedule/css/schedule.css') }}" media="all" >
+{%endblock %} 
+
+{% block jquery %} 
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script> 
+{% endblock %}
+
+<!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</head>
+<body>
+
+<div id="layout-content">
+  {% block content %}
+  {% endblock %}
+</div>
+
+{# Need more research on blocks #}
+{% block javascripts %}{% endblock %}
+    
+</body>
+</html>
+

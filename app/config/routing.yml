@@ -1,0 +1,8 @@
+cerad_schedule.index:
+    path: /
+    defaults: { _controller: CeradScheduleBundle:Schedule:index }
+    
+cerad_schedule.schedule:
+    path: /schedule
+    defaults: { _controller: CeradScheduleBundle:Schedule:index }
+    

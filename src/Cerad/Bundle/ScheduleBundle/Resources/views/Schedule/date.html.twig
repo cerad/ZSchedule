@@ -1,0 +1,5 @@
+<form action="{{ path('cerad_arbiter_date') }}" method="post" {{ form_enctype(form) }}>
+{{ form_widget(form.date1)  }}{{form_errors(form.date1) }}
+<input type="submit" name="schSearchSubmit" value="Search" /></td>
+{{ form_rest(form) }}
+</form>

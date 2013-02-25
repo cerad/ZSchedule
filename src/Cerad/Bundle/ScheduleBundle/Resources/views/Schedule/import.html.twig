@@ -1,0 +1,49 @@
+{% extends 'CeradArbiterBundle:Layout:layout.html.twig' %}
+
+{% block title %}Arbiter Schedule Import {% endblock %}
+
+{% block content %}
+<div>
+<form method="post" {{ form_enctype(form) }} action="{{ path('cerad_arbiter_schedule_import') }}">
+<table border="1" width="800">
+<tr><th colspan="2">Import Arbiter Information</th></tr>
+<tr>
+    <td>{{ form_label (form.password) }}</td>
+    <td>{{ form_widget(form.password) }}</td>
+</tr>
+<tr>
+    <td>{{ form_label (form.domain) }}</td>
+    <td>{{ form_widget(form.domain) }}</td>
+</tr>
+<tr>
+    <td>{{ form_label (form.season) }}</td>
+    <td>{{ form_widget(form.season) }}</td>
+</tr>
+<tr>
+    <td>{{ form_label (form.loader) }}</td>
+    <td>{{ form_widget(form.loader) }}</td>
+</tr>
+<tr>
+    <td>{{ form_label (form.defaultGameStatus) }}</td>
+    <td>{{ form_widget(form.defaultGameStatus) }}</td>
+</tr>
+<tr>
+    <td>{{ form_label (form.attachment) }}</td>
+    <td>{{ form_widget(form.attachment) }}</td>
+</tr>
+<tr>
+    <td>{{ form_label (form.output) }}</td>
+    <td>{{ form_widget(form.output) }}</td>
+</tr>
+<tr>
+  <td><a href="{{ path('cerad_arbiter_welcome') }}">Home</a></td>
+  <td align="center"><input type="submit" name="import_submit" value="Import" />
+</tr>
+<tr><td colspan="2">
+    {{ importMsg }} <br /> {{ form_errors(form.attachment) }}
+</td></tr>
+</table>
+{{ form_rest(form) }}
+</form>
+</div>
+{% endblock %}

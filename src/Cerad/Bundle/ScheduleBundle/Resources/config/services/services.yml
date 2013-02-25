@@ -13,5 +13,16 @@ services:
         arguments:  
             - '@cerad_schedule.schedule.manager'
 
+    cerad_schedule.schedule_search.formtype:
+        class: Cerad\Bundle\ScheduleBundle\Form\Type\Schedule\SearchFormType
+        arguments: 
+            - '@cerad_schedule.schedule.manager'
+            - '%schedule%'
+        tags:
+            - { name: form.type, alias: schedule_search }
 
+    cerad_schedule.schedule.twig_extension:
+        class:  Cerad\Bundle\ScheduleBundle\Twig\ScheduleExtension
+        tags:
+            - { name: twig.extension }
   

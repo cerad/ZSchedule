@@ -1,0 +1,38 @@
+{% if searchForm is defined  %}
+{% set form = searchForm     %}
+<div class="schedule-search">
+<form action="{{ path('cerad_schedule.schedule') }}" method="post" {{ form_enctype(form) }}>
+<table border="1" style="width: 1000px;">
+<tr>
+<td colspan="2">
+<table>
+    <tr>
+        <td>{{ form_widget(form.date1)      }}{{ form_errors(form.date1)     }}</td>
+        <td>{{ form_widget(form.date1On)    }}{{ form_label (form.date1On)   }}</td>
+        <td>{{ form_widget(form.date1After) }}{{ form_label (form.date1After)}}</td>
+    </tr><tr>
+        <td>{{ form_widget(form.date2)      }}{{ form_errors(form.date2)      }}</td>
+        <td>{{ form_widget(form.date2On)    }}{{ form_label (form.date2On)    }}</td>
+        <td>{{ form_widget(form.date2Before)}}{{ form_label (form.date2Before)}}</td>
+    </tr>
+</table>
+</td>
+<td>{{ form_widget(form.seasons)  }}</td>
+<td>{{ form_widget(form.sports)   }}</td>
+<td>{{ form_widget(form.statuses) }}</td>
+</tr><tr>
+    <td>{{ form_widget(form.domains)   }}</td>
+    <td>{{ form_widget(form.domainSubs)}}</td>
+    <td>{{ form_widget(form.levels)    }}</td>
+    <td>{{ form_widget(form.teams)     }}</td>
+    <td>{{ form_widget(form.fields)    }}</td>
+</tr>
+<tr>
+    <td colspan="2">{{ form_label(form.password) }} {{ form_widget(form.password) }}</td>
+    <td colspan="8" align="right"><input type="submit" name="schSearchSubmit" value="Search" /></td>
+</tr>
+</table>
+<div style="display: none;">{{ form_rest(form) }}</div>
+</form>        
+</div>
+{% endif %}

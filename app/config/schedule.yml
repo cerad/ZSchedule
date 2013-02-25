@@ -1,0 +1,46 @@
+parameters:
+
+# ====================================================
+# The only thing currently being used here is the game statuses
+    schedule:
+      
+        game_statuses:
+            Normal:    Normal
+            Canceled:  Canceled
+            Suspended: Suspended
+            Rainedout: Rained Out
+            Forfeit:   Forfeit
+            
+        groups:
+            ALYS:  ALYS
+            NASOA: NASOA
+            
+        seasons:
+            SP2013: 2013 Spring
+            FA2012: 2012 Fall
+            SP2012: 2012 Spring
+            SP2010: 2010 Spring
+            
+        sports:
+            Soccer:     Soccer
+            Baseball:   Baseball
+            Volleyball: Volleyball
+            
+        loaders:
+            ASL:
+                id:   cerad_arbiter.schedule.landscape.load
+                desc: Arbiter Schedule Landscape
+            ASP:
+                id:   cerad_arbiter.schedule.portrait.load
+                desc: Arbiter Schedule Portrait
+            ASC:
+                id:   cerad_arbiter.schedule.csv.load
+                desc: Arbiter Schedule CSV
+            AST:
+                id:   cerad_arbiter.schedule.teams.load
+                desc: Arbiter Schedule Teams
+            ASS:
+                id:   cerad_arbiter.schedule.sites.load
+                desc: Arbiter Schedule Sites
+                
+           

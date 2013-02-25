@@ -1,0 +1,48 @@
+
+.game-status-Normal
+{
+    /* background-color: white; */
+}
+.game-status-Canceled
+{
+    color: red;
+}
+.game-person-slots-Filled
+{
+    background-color: white; 
+    color:            #009933; 
+}
+.game-person-slots-Filled-Pending
+{
+    background-color: #FFFFFF ; 
+    color:            #08C ; 
+}
+.game-person-slots-Empty
+{
+    color:            red; 
+    background-color: white; 
+}
+.game-person-slots-Other
+{
+    background-color: white; 
+    color: magenta; 
+}
+.game-person-status-Accepted
+{
+    background-color: white; 
+    color: green; 
+}
+.game-person-status-Published
+{
+    background-color: white; 
+    color: magenta; 
+}
+game-person-status-Notified
+{
+    background-color: white; 
+    color: red; 
+}
+.game-no-tie
+{
+    color: magenta;
+}

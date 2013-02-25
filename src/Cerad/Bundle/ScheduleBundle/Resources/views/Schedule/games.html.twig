@@ -1,0 +1,77 @@
+<div class="schedule-games-list">
+    <table id="schedule" border="1" style="max-widthx: 850px;">
+    <thead>
+        <tr><th colspan="20">Game Schedule - Count: {{ games | length }}</th></tr>
+        <tr>
+            <th>Game</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>DOW</th>
+            <th>Time</th>
+            <th>Field</th>
+            <th>Sub Group</th>
+            <th>Level</th>
+            <th>Home / Away Teams</th>
+            <th>Officials</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for game in games %}
+        <tr id="ref-sched-{{game.num}}" class="game-status-{{game.status}}">
+            <td>
+                {% if 0 %}
+                <a href="{{ path('zayso_core_schedule_game_edit', { 'id': game.id })}}">{{ game.getNum() }}</a>
+                {% else %}
+                {{ game.num }}
+                {% endif %}
+            </td>
+            <td><span class="game-status-{{game.status}}">{{ game.status     }}</span></td>
+            
+            <td>{{ game.dtBeg.format('Y-m-d') }}</td>
+            <td>{{ game.dtBeg.format('D'    ) }}</td>
+            <td>{{ game.dtBeg.format('H:i A') }}</td>    
+            <td>{{ game.field.name      }}</td>
+            <td>{{ game.level.domain }} {{ game.level.domainSub }}</td>
+            <td>{{ game.level.name      }}
+                {% if game_is_section_match(game) %}<br /><span class="game-no-tie">SM - No Tie</span>{% endif %}
+            </td>
+           <td><table>
+                {% for gameTeam in game.teams %}
+                    <tr><td>{{ gameTeam.score }}</td><td>{{ gameTeam.name }}</td></tr>
+                {% endfor %}
+            </table></td>
+            {% if isAdmin %}
+            <td><table class="game-officials-list">
+                {% for gamePerson in game.persons  %}
+                <tr>
+                    <td>{{ game_person_status_short(gamePerson) }}</td>
+                    <td>{{ gamePerson.role }}:</td>
+                    <td class="game-person-status-{{ gamePerson.status }}">{{ gamePerson.name }} </td>
+                </tr>
+                {% endfor %}
+            </table></td>
+            {% else %}
+            <td><span class="{{ game_person_slot_class(game) }}">{{ game_person_slot_count(game) }}</span></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).ready(function() 
+    {
+        $('#schedule').dataTable(
+        {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": false,
+            "aaSorting": [[ 2, "asc" ],[ 5, "asc" ],[ 4, "asc" ]]
+        });
+    });
+</script>
+{% endblock %}

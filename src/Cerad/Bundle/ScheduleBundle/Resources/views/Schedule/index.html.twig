@@ -1,0 +1,13 @@
+{% extends '@schedule/../layout.html.twig' %}
+
+{% block title %}Arbiter Schedule {% endblock %}
+
+{% block content %}
+<p>
+    Schedule and scores are updated daily around 7:00 AM.<br />
+    <span class="game-no-tie">SM - No Tie</span> means it's a section match and cannot end in a tie.
+</p>
+{% include '@schedule/search.html.twig' %}
+{% include '@schedule/games.html.twig'  %}
+
+{% endblock %}

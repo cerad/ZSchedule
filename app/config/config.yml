@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: doctrine.yml }
+    - { resource: schedule.yml }
 
 framework:
     #esi:             ~
@@ -25,6 +26,8 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    paths:
+        "%kernel.root_dir%/../src/Cerad/Bundle/ScheduleBundle/Resources/views/Schedule": schedule
 
 # Assetic Configuration
 assetic:

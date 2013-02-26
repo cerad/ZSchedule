@@ -4,7 +4,9 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 
 $loader = require __DIR__.'/../vendor/autoload.php';
 
-$loader->add('Cerad', __DIR__ . '/../../cerad/src');
+$loader->add('Cerad',   __DIR__  . '/../../cerad/src');
+
+$loader->add(null, __DIR__ . '/../vendor/CodePlex/PHPExcel');
 
 // intl
 if (!function_exists('intl_get_error_code')) {

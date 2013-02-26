@@ -1,5 +1,8 @@
 services:
   
+    cerad_schedule.format.excel:
+        class:  Cerad\Bundle\ScheduleBundle\Format\PHPExcel\Excel
+
     cerad_schedule.schedule.manager:
         class:  Cerad\Bundle\ScheduleBundle\Schedule\ScheduleManager
         arguments:  
@@ -12,6 +15,7 @@ services:
         class:  Cerad\Bundle\ScheduleBundle\Schedule\Import\ImportScheduleMaster
         arguments:  
             - '@cerad_schedule.schedule.manager'
+            - '@cerad_schedule.format.excel'
 
     cerad_schedule.schedule_search.formtype:
         class: Cerad\Bundle\ScheduleBundle\Form\Type\Schedule\SearchFormType

@@ -7,56 +7,8 @@ use Doctrine\Common\PropertyChangedListener;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 
-class ImportScheduleSlots implements PropertyChangedListener, EventSubscriber
+class ImportScheduleSlots extends ImportScheduleBase
 {
-  //protected $manager;
-    protected $gameManager;
-    protected $fieldManager;
-    protected $levelManager;
-    protected $projectManager;
-    
-    public function __construct($manager)
-    {
-      //$this->manager        = $manager;
-        $this->gameManager    = $manager->gameManager;
-        $this->fieldManager   = $manager->fieldManager;
-        $this->levelManager   = $manager->levelManager;
-        $this->projectManager = $manager->projectManager;
-        
-    }
-    public function getSubscribedEvents()
-    {
-        return array(Events::onFlush);
-    }
-    protected $persistFlag = false;
-    
-    protected function persist($item) 
-    { 
-        if ($this->persistFlag) $this->gameManager->persist($item);     
-    }
-    protected $flushCount = 0;
-    
-    protected function flush($always = false)
-    { 
-        if (!$this->persistFlag) return;
-        
-        /* ===============================
-         * Duration
-         * 100 16364
-         * 500 16862
-         *  10 16291
-         */
-        if ($this->flushCount < 100 && !$always) $this->flushCount++;
-        else
-        {
-            $this->gameManager->flush();
-            $this->gameManager->clear(); // This causes issues with my cache when creating new projects
-            $this->fieldManager->clearCache();
-            $this->levelManager->clearCache();
-            $this->projectManager->clearCache();
-            $this->flushCount = 0;
-        }
-    }
     protected function processGameTeam($team,$game,$gameReportStatus,$name,$score)
     {
         $team->setLevel($game->getLevel());
@@ -81,16 +33,16 @@ class ImportScheduleSlots implements PropertyChangedListener, EventSubscriber
             'domainSub' => $row['domainSub'],
         );
         // Some basic info      
-        $project = $this->projectManager->processEntity($params);
+        $project = $this->projectManager->processEntity($params,$this->persistFlag);
      
         $params['name'] = $row['level'];
-        $level = $this->levelManager->processEntity($params);
+        $level = $this->levelManager->processEntity($params,$this->persistFlag);
         
         $params['venue']    = $row['venue'];
         $params['venueSub'] = $row['venueSub'];
         unset($params['name']);
         
-        $field = $this->fieldManager->processEntity($params);
+        $field = $this->fieldManager->processEntity($params, $this->persistFlag);
         
         // Typecast is important because the property change stuff is type specific
         $num = (int)$row['num'];
@@ -173,8 +125,6 @@ class ImportScheduleSlots implements PropertyChangedListener, EventSubscriber
      * Only flushing on game changes does not seem to help
      * Adding the listeners take just a tiny amount
      */
-    protected $gameHasChanged;
-    
     protected function processExistingGame($row,$game,$project,$level,$field,$num)
     {
        // Maybe use changeListener?
@@ -240,29 +190,6 @@ class ImportScheduleSlots implements PropertyChangedListener, EventSubscriber
         }
         return;
     }
-    /* =====================================================================
-     * Property change listener for debugging
-     */
-    public function propertyChanged($item, $propName, $oldValue, $newValue)
-    {
-        $this->gameHasChanged = true;
-        switch($propName)
-        {
-            case 'dtBeg':
-            case 'dtEnd':
-            case 'score':
-            case 'name':
-            case 'field':
-            case 'status':
-            case 'level': // NasoaSlots20130201.xml
-            case 'role':
-                return;
-        }
-        echo $item;
-        echo sprintf(" Prop: %s\n",$propName);;
-        
-        die();
-    }
     /* ====================================================================
      * Import a file
      */
@@ -299,6 +226,10 @@ class ImportScheduleSlots implements PropertyChangedListener, EventSubscriber
             $this->results->totalGamesCount++;
             $this->processRow($row);
 
+            // Does not really help
+            // $row = null;
+            // unset($row);
+            
             // On to the next one
             $reader->next('Detail');
         }
@@ -402,46 +333,6 @@ class ImportScheduleSlots implements PropertyChangedListener, EventSubscriber
         'gameReportOfficial' => 'Reporting_Official',
         
     );
-    /* =================================================
-     * Listen to the flush and update results
-     * 
-     */
-    public function onFlush(OnFlushEventArgs $eventArgs)
-    {   
-        $em = $eventArgs->getEntityManager();
-        $uow = $em->getUnitOfWork();
-    
-        $results = $this->results;
-        
-        foreach ($uow->getScheduledEntityInsertions() AS $entity) 
-        {
-            $className = get_class($entity);
-            switch($className)
-            {
-                case 'Cerad\Bundle\GameBundle\Entity\Game': $results->totalGamesInserted++; break;
-            }
-        }
-        foreach ($uow->getScheduledEntityUpdates() AS $entity) 
-        {
-            $className = get_class($entity);
-            switch($className)
-            {
-                case 'Cerad\Bundle\GameBundle\Entity\Game':       $results->totalGamesUpdated++;       break;
-                case 'Cerad\Bundle\GameBundle\Entity\GameTeam':   $results->totalGameTeamsUpdated++;   break;
-                case 'Cerad\Bundle\GameBundle\Entity\GamePerson': $results->totalGamePersonsUpdated++; break;
-            }
-        }
-        foreach ($uow->getScheduledEntityDeletions() AS $entity) 
-        {
-        }
-        foreach ($uow->getScheduledCollectionDeletions() AS $col) 
-        {
 
-        }
-        foreach ($uow->getScheduledCollectionUpdates() AS $col) 
-        {
-
-        }    
-    }    
 }
 ?>

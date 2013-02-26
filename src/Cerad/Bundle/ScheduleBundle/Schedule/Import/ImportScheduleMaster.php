@@ -50,7 +50,7 @@ class ImportScheduleMaster
 
         $rows = $ws->toArray();
      
-        $importClass = 'Cerad\ArbiterBundle\Schedule\Import\ImportSchedulePortrait';
+        $importClass = 'Cerad\Bundle\ScheduleBundle\Schedule\Import\ImportSchedulePortXLS';
         
         $import = new $importClass($this->manager);
         
@@ -76,17 +76,19 @@ class ImportScheduleMaster
             $ext = pathinfo($params['inputFileName'],  PATHINFO_EXTENSION);
         }
         // XML Slots
-        if ($ext == 'xml') 
+        switch($ext)
         {
-            $results = $this->importFileXML($params);
-            $event = $stopwatch->stop('importFile');
-            $results->duration = $event->getDuration();
-            $results->memory   = $event->getMemory();
-            return $results;
+            case 'xml': $results = $this->importFileXML($params); break;
+            case 'xls': $results = $this->importFileXLS($params); break;
+            default:
+                throw new \Exception('Unsupported file type');
         }
-        //if ($ext == 'xls') return $this->importFileXLS($params);
+        $event = $stopwatch->stop('importFile');
+        $results->duration = $event->getDuration();
+        $results->memory   = $event->getMemory();
         
-        return;       
+        return $results;
+          
     }
 }
 ?>

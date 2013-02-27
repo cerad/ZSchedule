@@ -25,7 +25,7 @@ class ImportScheduleMaster
         if (!$reader->next('Report')) 
         {
             $reader->close();
-            return;
+            return null;
         }
         // Verify report type
        $reportType = $reader->getAttribute('Name');
@@ -34,7 +34,7 @@ class ImportScheduleMaster
            case 'Games with Slots': $importClass = 'Cerad\Bundle\ScheduleBundle\Schedule\Import\ImportScheduleSlots'; break;
            default:
                $reader->close();
-               return;
+               return null;
        }
        $import = new $importClass($this->manager);
        
@@ -56,7 +56,18 @@ class ImportScheduleMaster
         
         return $import->importFile($params,$rows);
     }        
+    public function importFileTXT($params)
+    {
+        $inputFileName = $params['inputFileName'];
+        
+        $fp = fopen($inputFileName,'rt');
 
+        $importClass = 'Cerad\Bundle\ScheduleBundle\Schedule\Import\ImportSchedulePortTXT';
+        
+        $import = new $importClass($this->manager);
+        
+        return $import->importFile($params,$fp);
+    }
     public function importFile($params)
     {
         $stopwatch = new Stopwatch();
@@ -80,6 +91,7 @@ class ImportScheduleMaster
         {
             case 'xml': $results = $this->importFileXML($params); break;
             case 'xls': $results = $this->importFileXLS($params); break;
+            case 'txt': $results = $this->importFileTXT($params); break;
             default:
                 throw new \Exception('Unsupported file type');
         }

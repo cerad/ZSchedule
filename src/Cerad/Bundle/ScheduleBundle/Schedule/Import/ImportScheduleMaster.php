@@ -68,6 +68,18 @@ class ImportScheduleMaster
         
         return $import->importFile($params,$fp);
     }
+    public function importFileCSV($params)
+    {
+        $inputFileName = $params['inputFileName'];
+        
+        $fp = fopen($inputFileName,'rt');
+
+        $importClass = 'Cerad\Bundle\ScheduleBundle\Schedule\Import\ImportScheduleSlotCSV';
+        
+        $import = new $importClass($this->manager);
+        
+        return $import->importFile($params,$fp);
+    }
     public function importFile($params)
     {
         $stopwatch = new Stopwatch();
@@ -92,6 +104,7 @@ class ImportScheduleMaster
             case 'xml': $results = $this->importFileXML($params); break;
             case 'xls': $results = $this->importFileXLS($params); break;
             case 'txt': $results = $this->importFileTXT($params); break;
+            case 'csv': $results = $this->importFileCSV($params); break;
             default:
                 throw new \Exception('Unsupported file type');
         }

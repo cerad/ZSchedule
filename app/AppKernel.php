@@ -20,7 +20,12 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             
+            new FOS\UserBundle\FOSUserBundle(),
+             
+            new Cerad\Bundle\AccountBundle\CeradAccountBundle(),
+            
             new Cerad\Bundle\GameBundle\CeradGameBundle(),
+            
             new Cerad\Bundle\ScheduleBundle\CeradScheduleBundle(),
        );
 

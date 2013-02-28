@@ -35,6 +35,7 @@ doctrine:
        #auto_mapping: true
                 
         entity_managers:
+          
             default:
                 connection: default
                 mappings:
@@ -49,3 +50,9 @@ doctrine:
                         time:  Cerad\Bundle\GameBundle\Doctrine\DQL\Time
                         month: Cerad\Bundle\GameBundle\Doctrine\DQL\Month
                         
+            accounts:
+               connection: accounts
+               mappings:
+                    FOSUserBundle: ~
+                    CeradAccountBundle: ~
+                       

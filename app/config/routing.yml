@@ -5,4 +5,26 @@ cerad_schedule.index:
 cerad_schedule.schedule:
     path: /schedule
     defaults: { _controller: CeradScheduleBundle:Schedule:index }
-    
+   
+# ==================================================
+# FOSUserBundle Stuff
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    prefix: /account
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /account/profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /account/register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /account/resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /account/profile
+

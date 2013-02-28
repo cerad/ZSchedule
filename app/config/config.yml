@@ -6,7 +6,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: %locale% }
+    translator:      { fallback: %locale% }
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -49,3 +49,22 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+    
+fos_user:
+    db_driver:     orm
+    firewall_name: main
+    user_class:    Cerad\Bundle\AccountBundle\Entity\AccountUser
+    model_manager_name: accounts
+    
+#   from_email:
+#       address:        noreply@zayso.org
+#       sender_name:    Zayso No Reply
+    
+    registration:
+        form:
+            type:               cerad_account_registration
+        confirmation:
+            enabled:            true
+            from_email:
+                address:        admin@zayso.org
+                sender_name:    Zayso Registration

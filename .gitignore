@@ -16,3 +16,4 @@
 /app/phpunit.xml
 
 /src/Acme/
+/vendorx/

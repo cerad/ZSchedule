@@ -8,6 +8,7 @@ parameters:
     
     database_name_games:    gamesx
     database_name_accounts: accountsx
+    database_name_persons:  personsx
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1

@@ -66,7 +66,7 @@ class ImportScheduleSlots extends ImportScheduleBase
          */
         if (isset($this->games[$num]))
         {
-            echo sprintf("Dup Game %d\n",$num); // 1300491, 1300869 in NasoaSlots20130220.xml
+          //echo sprintf("Dup Game %d\n",$num); // 1300491, 1300869 in NasoaSlots20130220.xml
             return;
         }
         $this->games[$num] = $num;

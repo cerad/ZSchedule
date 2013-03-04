@@ -55,7 +55,7 @@ class ImportCommand extends ContainerAwareCommand
             'defaultGameStatus' => 'Normal',
             'inputFileName'     => $datax . '/arbiter/SP2013/' . $file,
         );
-        $import = $this->getService('cerad_schedule.schedule.import.master');
+        $import = $this->getService('cerad_arbiter.schedule.import.master');
         
         $results = $import->importFile($params);
         

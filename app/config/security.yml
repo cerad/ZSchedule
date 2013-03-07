@@ -31,6 +31,15 @@ security:
             
             anonymous: ~
             
+            cerad_janrain:
+                provider:            fos_userbundle
+                add_path:            cerad_janrain_add
+                check_path:          cerad_janrain_check
+                login_path:          cerad_janrain_login
+                register_path:       fos_user_registration_register
+                default_target_path: fos_user_profile_show
+                rpx_api_key:        %cerad_janrain_rpxApiKey%
+            
             form_login:
                 provider:            fos_userbundle
                 check_path:          fos_user_security_check

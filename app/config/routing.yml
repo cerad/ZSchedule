@@ -5,7 +5,12 @@ cerad_schedule.index:
 cerad_schedule.schedule:
     path: /schedule
     defaults: { _controller: CeradScheduleBundle:Schedule:index }
-   
+    
+# ==================================================
+# Janrain Authentication
+cerad_janrain:
+  resource: "@CeradJanrainBundle/Resources/config/routing.yml"
+  
 # ==================================================
 # FOSUserBundle Stuff
 fos_user_security:

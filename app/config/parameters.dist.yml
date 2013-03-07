@@ -19,3 +19,5 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
     
     datax:             /home/ahundiak/datax
+    
+    cerad_janrain_rpxApiKey:       

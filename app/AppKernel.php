@@ -23,12 +23,14 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
              
             new Cerad\Bundle\AccountBundle\CeradAccountBundle(),
-            
-            new Cerad\Bundle\PersonBundle\CeradPersonBundle(),
+            new Cerad\Bundle\JanrainBundle\CeradJanrainBundle(),
             
             new Cerad\Bundle\GameBundle   \CeradGameBundle(),
+            new Cerad\Bundle\PersonBundle \CeradPersonBundle(),
+            
             new Cerad\Bundle\ArbiterBundle\CeradArbiterBundle(),
             
+            // Application
             new Cerad\Bundle\ScheduleBundle\CeradScheduleBundle(),
        );
 

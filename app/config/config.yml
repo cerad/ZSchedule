@@ -56,6 +56,9 @@ fos_user:
     user_class:    Cerad\Bundle\AccountBundle\Entity\AccountUser
     model_manager_name: accounts
     
+    service:
+        user_manager: cerad_account.user_manager
+    
 #   from_email:
 #       address:        noreply@zayso.org
 #       sender_name:    Zayso No Reply

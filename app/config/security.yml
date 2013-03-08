@@ -20,6 +20,9 @@ security:
                     
         fos_userbundle:
             id: fos_user.user_provider.username_email
+            
+        cerad_account_user_provider:
+            id: cerad_account.user_provider
 
     firewalls:
         dev:
@@ -32,13 +35,13 @@ security:
             anonymous: ~
             
             cerad_janrain:
-                provider:            fos_userbundle
+                provider:            cerad_account_user_provider
                 add_path:            cerad_janrain_add
                 check_path:          cerad_janrain_check
                 login_path:          cerad_janrain_login
                 register_path:       fos_user_registration_register
                 default_target_path: fos_user_profile_show
-                rpx_api_key:        %cerad_janrain_rpxApiKey%
+                rpx_api_key:        %cerad_janrain_rpx_api_key%
             
             form_login:
                 provider:            fos_userbundle

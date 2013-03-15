@@ -28,6 +28,7 @@ twig:
     strict_variables: %kernel.debug%
     paths:
         "%kernel.root_dir%/../src/Cerad/Bundle/ScheduleBundle/Resources/views/Schedule": schedule
+        "%kernel.root_dir%/../../cerad/src/Cerad/Bundle/PersonBundle/Resources/views":   person
 
 # Assetic Configuration
 assetic:

@@ -6,9 +6,10 @@ parameters:
     database_user:     root
     database_password: ~
     
-    database_name_games:    gamesx
-    database_name_accounts: accountsx
-    database_name_persons:  personsx
+    database_name_games:       gamesx
+    database_name_accounts:    accountsx
+    database_name_persons:     personsx
+    database_name_legacy2012:  osso2012x
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1

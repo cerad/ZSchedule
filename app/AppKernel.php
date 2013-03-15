@@ -30,6 +30,8 @@ class AppKernel extends Kernel
             
             new Cerad\Bundle\ArbiterBundle\CeradArbiterBundle(),
             
+            new Cerad\Bundle\Legacy2012Bundle\CeradLegacy2012Bundle(),
+            
             // Application
             new Cerad\Bundle\ScheduleBundle\CeradScheduleBundle(),
        );
